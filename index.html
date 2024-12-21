@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giáng Sinh An Lành Cho Tình Yêu Của Anh</title>
+    <style>
+        body {
+            margin: 0;
+            background: linear-gradient(135deg, #ff9999, #ffcccc);
+            font-family: 'Courier New', sans-serif;
+            color: #800000;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            display: none;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-top: 10vh;
+            text-shadow: 2px 2px 4px #fff;
+        }
+
+        .message {
+            font-size: 1.5em;
+            margin: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .santa {
+            position: fixed;
+            width: 100px;
+            top: 20%;
+            animation: santaMove 10s linear infinite;
+        }
+
+        @keyframes santaMove {
+            0% {
+                left: -100px;
+            }
+            50% {
+                left: 50%;
+                transform: scale(1.2);
+            }
+            100% {
+                left: 110%;
+            }
+        }
+
+        .gift-box {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 100px;
+            background: url('https://img.icons8.com/emoji/100/wrapped-gift.png') no-repeat center/contain;
+            cursor: pointer;
+        }
+
+        .gift-box:hover {
+            transform: translateX(-50%) scale(1.1);
+            transition: transform 0.3s;
+        }
+
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: white;
+            font-size: 1em;
+            pointer-events: none;
+            animation: fall 5s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) translateX(50px);
+                opacity: 0.5;
+            }
+        }
+
+        .music {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 1.2em;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .heart {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            width: 100px;
+            height: 100px;
+            background: red;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1) translate(-50%, -50%) rotate(-45deg);
+            }
+            50% {
+                transform: scale(1.2) translate(-50%, -50%) rotate(-45deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Giáng Sinh An Lành, Tình Yêu Của Anh!</h1>
+        <p class="message">"Em là ánh sáng của đời anh, giống như những ngọn đèn Giáng Sinh. Chúc em niềm vui bất tận!"</p>
+        <p class="message">"Mong rằng Giáng Sinh này sẽ đẹp đẽ và đặc biệt như em đối với anh."</p>
+        <p class="message">"Mỗi ngày bên em đều như một ngày lễ. Giáng Sinh vui vẻ, trái tim của anh!"</p>
+    </div>
+
+    <img src="https://img.icons8.com/emoji/100/santa-claus-medium-light-skin-tone.png" alt="Ông già Noel" class="santa">
+
+    <audio id="background-music" loop>
+        <source src="/mnt/data/christmas_music.mp3" type="audio/mpeg">
+    </audio>
+    <div class="music" onclick="toggleMusic()">🎵 Bật/Tắt nhạc</div>
+
+    <script>
+        // Hiển thị nội dung chính sau 3 giây
+        setTimeout(() => {
+            document.querySelector('.container').style.display = 'block';
+        }, 3000);
+
+        // Thêm hiệu ứng tuyết rơi
+        const createSnowflake = () => {
+            const snowflake = document.createElement('div');
+            snowflake.classList.add('snowflake');
+            snowflake.textContent = '❄';
+            snowflake.style.left = Math.random() * window.innerWidth + 'px';
+            snowflake.style.fontSize = Math.random() * 10 + 10 + 'px';
+            snowflake.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.body.appendChild(snowflake);
+
+            setTimeout(() => {
+                snowflake.remove();
+            }, 5000);
+        };
+
+        setInterval(createSnowflake, 200);
+
+        // Nhạc nền
+        const music = document.getElementById('background-music');
+        const toggleMusic = () => {
+            if (music.paused) {
+                music.play();
+            } else {
+                music.pause();
+            }
+        };
+
+        // Tự động phát nhạc khi người dùng click vào trang
+        document.body.addEventListener('click', () => {
+            music.play();
+        }, { once: true });
+    </script>
+</body>
+</html>
